@@ -1,0 +1,89 @@
+Craft:
+    - Reducing the risk of future changes. 
+
+1) Run and familiarise yourselves with the code base. 
+2) Start a list of potential issues/smells that need changing.
+    - OrderProcess just long, too much logic.
+    - magic numbers - dangerous for business logic.
+    - st.outs everwhere - harder to test. side effect actions. 
+    - delivery + payment types could easily be messed up with typos/hard to extend. 
+
+Code review structure:
+    1) Context:
+        - purpose. 
+        - inputs/outputs.
+        - class responsibilities. 
+        - where/what are the complex bits. 
+
+    2) Design - issue + suggest solution:
+        - god classes.
+        - Coupling. 
+        - seperation of concerns.
+        - abstraction. 
+        - lack of enums/interfaces
+
+    3) Readbility issue + suggest solution:
+        - vague + inconsistant naming
+        - long methods
+        - deep layers/nesting
+        - magic numbers
+        - bad commenting
+        - poor formatting
+
+    4) Robustness issue + suggest solution:
+        - Null handling
+        - error handling clarity
+        - missing validations
+        - ignring exceptions
+        - threading/concurrency problems
+
+    5) Maintainability + testability issue + suggest solution:
+        - Can we test easily?
+        - duplications?
+        - lack of modularity
+        - too many side-effect actions
+        - state required.
+        - hard to change/extend  
+
+        FORMAT:
+
+    ISSUE        WHY             FIX                 REGRESSION TEST
+1)  god class    hard to         Extract to a, b,    tests for each new class. 
+                 maintain.       c etc.
+    
+
+After CL is made and implemented peer review the changes by asking:
+        - Can I still understand the order flow?
+        - Did the main method get smaller?
+        - Does each class have a clear reason to exist?
+        - Are business rules easier to find?
+        - Do tests still pass after the change?
+        - Was a design pattern used because it helped, or because it sounded good?       
+
+3) Think 4-5 tests that should be written. 
+
+    what if i could on write one(more) test only?
+    = what is the most important untested behaviour?
+     = whats worse when it breaks?
+       = what edges cases, what mocks, what ints?
+
+
+Tests to write:
+
+1) students discount applied correctly
+2) staff dicount applied correctly
+3) standard delivery becomes free over correct amount.
+4) invalid delivery type throws an exception.
+
+stretch:
+5) Empty order should be rejected.
+6) Collection has no delivery fee added.
+7) Premium customer gets larger discount on 5+ items. 
+
+
+
+4) repo set-up.
+
+5) basic jenkins pipeline.
+6) advanced features. 
+7) write tests
